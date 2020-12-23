@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
     protected void populateMealList(){
 
         MealApiService service = RetrofitClientInstance.getRetrofitInstance().create( MealApiService.class );
-        Call<MealsModel.Meal> call = service.getMeals();
-
+        Call<MealsModel.Meal> call = service.getMeals( );
+//
         call.enqueue(new Callback<MealsModel.Meal>() {
             @Override
             public void onResponse(Call<MealsModel.Meal> call, Response<MealsModel.Meal> response) {
