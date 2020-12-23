@@ -36,6 +36,7 @@ public class MealsAdapter {
             holder.strMeal.setText( meal.getStrMeal() );
             holder.strCategory.setText( meal.getStrMeal() );
             holder.strArea.setText( meal.getStrMeal() );
+            //Picasso?
         }
 
         @Override
