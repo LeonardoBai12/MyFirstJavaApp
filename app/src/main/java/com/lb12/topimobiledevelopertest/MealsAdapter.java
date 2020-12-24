@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,7 +35,6 @@ public class MealsAdapter {
             holder.strMeal.setText( meal.getStrMeal() );
             holder.strCategory.setText( meal.getStrMeal() );
             holder.strArea.setText( meal.getStrMeal() );
-            //Picasso?
         }
 
         @Override
