@@ -5,8 +5,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClientInstance {
 
-    private static Retrofit retrofit;
-    private static final String BASE_URL = "https://www.themealdb.com";
+    private static Retrofit retrofit  = null;
+    private static final String BASE_URL = "https://www.themealdb.com/";
 
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {
