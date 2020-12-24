@@ -15,9 +15,9 @@ public class MealsAdapter {
 
     public static class Adapter extends RecyclerView.Adapter< Adapter.MyViewHolder >{
 
-        private List<MealsModel.Meal> mealsList;
+        private List<EnvelopeMeal> mealsList;
 
-        public Adapter( List<MealsModel.Meal> list ) {
+        public Adapter( List<EnvelopeMeal> list ) {
             this.mealsList = list;
         }
 
@@ -35,6 +35,9 @@ public class MealsAdapter {
             holder.strMeal.setText( meal.getStrMeal() );
             holder.strCategory.setText( meal.getStrMeal() );
             holder.strArea.setText( meal.getStrMeal() );
+
+            //;;meaList.get(position).getalgumacoisa()
+
         }
 
         @Override

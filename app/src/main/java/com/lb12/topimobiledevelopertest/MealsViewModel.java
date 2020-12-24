@@ -36,12 +36,14 @@ public class MealsViewModel{
         MealApiService service = RetrofitClientInstance.getRetrofitInstance().create( MealApiService.class );
         Call<EnvelopeMeal> call = service.getMeals( FILTER );
 
+        Log.i("calleee",call.toString());
+
         call.enqueue(new Callback<EnvelopeMeal>() {
 
             @Override
             public void onResponse(Call<EnvelopeMeal> call, Response<EnvelopeMeal> response) {
                 progressDialog.dismiss();
-                MealsAdapter.Adapter adapter = new MealsAdapter.Adapter( mealList );
+                MealsAdapter.Adapter adapter = new MealsAdapter.Adapter( response.body() );
                 createRecyclerView(
                         appContext,
                         mainContext,
