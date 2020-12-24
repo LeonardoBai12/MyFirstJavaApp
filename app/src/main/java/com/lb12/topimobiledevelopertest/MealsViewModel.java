@@ -36,8 +36,6 @@ public class MealsViewModel{
         MealApiService service = RetrofitClientInstance.getRetrofitInstance().create( MealApiService.class );
         Call<EnvelopeMeal> call = service.getMeals( FILTER );
 
-        Log.i("calleee",call.toString());
-
         call.enqueue(new Callback<EnvelopeMeal>() {
 
             @Override
