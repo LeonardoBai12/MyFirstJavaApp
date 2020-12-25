@@ -1,12 +1,9 @@
 package com.lb12.topimobiledevelopertest;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-
-import androidx.core.view.MotionEventCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 //  https://github.com/jamiltondamasceno/RecyclerItemClickListener/blob/master/RecyclerItemClickListener.java
@@ -21,7 +18,6 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
 
     private OnItemClickListener mListener;
     private GestureDetector mGestureDetector;
-    private final String DEBUG_TAG = "AppDebug";
 
     public RecyclerItemClickListener(Context context, final RecyclerView recyclerView, OnItemClickListener listener)
     {
@@ -64,24 +60,7 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
     @Override
     public void onTouchEvent(RecyclerView view, MotionEvent motionEvent)
     {
-/*
-        int action = MotionEventCompat.getActionMasked(motionEvent);
 
-        switch(action) {
-            case (MotionEvent.ACTION_DOWN) :
-                Log.d(DEBUG_TAG,"Action was DOWN");
-            case (MotionEvent.ACTION_MOVE) :
-                Log.d(DEBUG_TAG,"Action was MOVE");
-            case (MotionEvent.ACTION_UP) :
-                Log.d(DEBUG_TAG,"Action was UP");
-            case (MotionEvent.ACTION_CANCEL) :
-                Log.d(DEBUG_TAG,"Action was CANCEL");
-            case (MotionEvent.ACTION_OUTSIDE) :
-                Log.d(DEBUG_TAG,"Movement occurred outside bounds " +
-                        "of current screen element");
-            default :
-                super.onTouchEvent(motionEvent);
-        }*/
     }
 
     @Override
