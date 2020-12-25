@@ -129,34 +129,6 @@ public class MealsAdapter {
 
     }
 
-    protected static String[] populateIngredientList(MealsModel.Meal meal){
-
-        String[] ingredientsList = {
-                meal.getStrInstructions(),
-                meal.getStrIngredient1(),
-                meal.getStrIngredient2(),
-                meal.getStrIngredient3(),
-                meal.getStrIngredient4(),
-                meal.getStrIngredient5(),
-                meal.getStrIngredient6(),
-                meal.getStrIngredient7(),
-                meal.getStrIngredient8(),
-                meal.getStrIngredient9(),
-                meal.getStrIngredient10(),
-                meal.getStrIngredient11(),
-                meal.getStrIngredient12(),
-                meal.getStrIngredient13(),
-                meal.getStrIngredient14(),
-                meal.getStrIngredient15(),
-                meal.getStrIngredient16(),
-                meal.getStrIngredient17(),
-                meal.getStrIngredient18(),
-                meal.getStrIngredient19()
-        };
-
-        return ingredientsList;
-    }
-
     static void createRecyclerViewSwipe(
             SwipeRefreshLayout swipeContainer,
             MealsAdapter.Adapter adapter,
