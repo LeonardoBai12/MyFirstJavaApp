@@ -1,13 +1,20 @@
 package com.lb12.topimobiledevelopertest;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -22,11 +29,14 @@ public class MainActivity extends AppCompatActivity {
         MealsViewModel.populateMealList(
                 progressDialog,
                 getApplicationContext(),
-                MainActivity.this,
-                findViewById( R.id.recyclerView )
+                findViewById( R.id.recyclerView ),
+                findViewById(R.id.swipeContainer)
         );
 
     }
+
+
+
 
 
 

@@ -121,8 +121,8 @@ public class MealsModel {
             this.strMeal = strMeal;
             this.strCategory = strCategory;
             this.strArea = strArea;
-            this.strInstructions = strInstructions;
             this.strMealThumb = strMealThumb;
+            this.strInstructions = strInstructions;
             this.strTags = strTags;
             this.strYoutube = strYoutube;
             this.strIngredient1 = strIngredient1;
