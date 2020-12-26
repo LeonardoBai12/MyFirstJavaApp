@@ -24,25 +24,28 @@ public class IngredientsViewModel {
     private static ArrayAdapter<String> adapter;
     private static ArrayList<String> ingredientList;
     private static String strYoutube;
-    private static String strInstructions;
 
     public static void createIngredientsList(
             Context appContext,
             YouTubePlayerView youtubeView,
             ListView ingredientsListView,
-            TextView instructionsTextView,
+            TextView strMealView,
+            TextView strAreaView,
+            TextView strInstructionsView,
             Intent intent
-    ) throws MalformedURLException {
+    ){
 
         Bundle bundle = intent.getExtras();
 
         if ( bundle != null) {
             ingredientList  = bundle.getStringArrayList("ingredientList");
             strYoutube      = bundle.getString("StrYoutube");
-            strInstructions = bundle.getString("StrInstructions");
-        }
 
-        Log.i("ihaaaaa", extractYoutubeId(strYoutube) );
+            strMealView.setText( bundle.getString("StrMeal") );
+            strAreaView.setText( bundle.getString("StrArea") );
+            strInstructionsView.setText( bundle.getString("StrInstructions") );
+
+        }
 
         if ( strYoutube != null && !strYoutube.trim().isEmpty()) {
 
@@ -60,7 +63,6 @@ public class IngredientsViewModel {
                         @Override
                         public void onInitializationFailure(YouTubePlayer.Provider provider,
                                                             YouTubeInitializationResult youTubeInitializationResult) {
-
                         }
                     });
         }
@@ -72,8 +74,6 @@ public class IngredientsViewModel {
 
         ingredientsListView.setAdapter( adapter );
         setListViewHeightBasedOnChildren(ingredientsListView, adapter);
-
-        instructionsTextView.setText( strInstructions );
 
     }
 

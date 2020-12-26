@@ -127,6 +127,8 @@ public class MealsAdapter {
 
                                 bundle.putString( "StrYoutube", meal.getStrYoutube() );
                                 bundle.putString( "StrInstructions", meal.getStrInstructions() );
+                                bundle.putString( "StrMeal", meal.getStrMeal() );
+                                bundle.putString( "StrArea", meal.getStrArea() );
                                 bundle.putStringArrayList( "ingredientList", ingredientsList );
 
                                 intent.putExtras( bundle );
@@ -162,25 +164,20 @@ public class MealsAdapter {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                adapter.clear();
-                callMealListFromPHP(
-                        swipeContainer,
-                        appContext,
-                        progressDialog,
-                        adapter
-                );
+
+                // TODO
+//                adapter.clear();
+//                callMealListFromPHP(
+//                        appContext,
+//                        progressDialog,
+//                        adapter
+//                );
+                swipeContainer.setRefreshing(false);
+
+
             }
         });
 
     }
-
-    public static MealsModel.Meal getMeal() {
-        return meal;
-    }
-
-    void setMeal(MealsModel.Meal meal) {
-        this.meal = meal;
-    }
-
 
 }

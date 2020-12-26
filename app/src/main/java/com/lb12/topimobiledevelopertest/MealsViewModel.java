@@ -32,7 +32,6 @@ public class MealsViewModel{
         MealsAdapter.Adapter adapter = new MealsAdapter.Adapter(appContext);
 
         callMealListFromPHP(
-                swipeContainer,
                 appContext,
                 progressDialog,
                 adapter
@@ -55,7 +54,6 @@ public class MealsViewModel{
     }
 
     static void callMealListFromPHP(
-            SwipeRefreshLayout swipeContainer,
             Context appContext,
             ProgressDialog progressDialog,
             MealsAdapter.Adapter adapter
@@ -77,8 +75,6 @@ public class MealsViewModel{
                         appContext,
                         response.body().getMealList()
                 );
-
-                swipeContainer.setRefreshing(false);
 
             }
 
