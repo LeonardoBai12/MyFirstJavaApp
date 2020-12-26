@@ -1,12 +1,9 @@
 package com.lb12.topimobiledevelopertest;
 
 import android.content.Context;
-import android.content.Intent;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
-
 
 public class IngredientsAdapter {
 
