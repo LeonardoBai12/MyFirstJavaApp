@@ -25,9 +25,7 @@ import static com.lb12.topimobiledevelopertest.MealsAdapter.createRecyclerViewSw
 public class MealsViewModel{
 
     private static RecyclerView recyclerView;
-    private static List<MealsModel.Meal> mealList = new ArrayList<>();
     private static final String FILTER = "Chicken";
-    private ProgressDialog progressDialog;
 
     static void populateMealList(
             ProgressDialog progressDialog,
@@ -55,15 +53,11 @@ public class MealsViewModel{
 
     }
 
-    static void createRecyclerView(
-            Context appContext,
-            MealsAdapter.Adapter adapter
-    ){
+    static void createRecyclerView( Context appContext ){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager( appContext );
         recyclerView.setLayoutManager( layoutManager );
         recyclerView.setHasFixedSize( true );
         recyclerView.addItemDecoration( new DividerItemDecoration( appContext, LinearLayout.VERTICAL ) );
-        recyclerView.setAdapter( adapter );
     }
 
     static void callMealListFromPHP(
@@ -81,11 +75,9 @@ public class MealsViewModel{
             @Override
             public void onResponse(Call<EnvelopeMeal> call, Response<EnvelopeMeal> response) {
                 progressDialog.dismiss();
-                createRecyclerView(
-                        appContext,
-                        adapter
-                );
+                createRecyclerView(appContext);
                 adapter.updateList(response.body().getMealList());
+                recyclerView.setAdapter( adapter );
                 MealsAdapter.createRecyclerViewClick(
                         recyclerView,
                         appContext,

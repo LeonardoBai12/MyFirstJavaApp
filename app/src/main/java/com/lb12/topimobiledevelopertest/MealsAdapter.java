@@ -2,6 +2,8 @@ package com.lb12.topimobiledevelopertest;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +20,15 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static com.lb12.topimobiledevelopertest.IngredientsAdapter.createIngredientsAdapter;
+import static com.lb12.topimobiledevelopertest.IngredientsModel.populateIngredientList;
 import static com.lb12.topimobiledevelopertest.MealsViewModel.callMealListFromPHP;
 
 public class MealsAdapter {
+
+    public static MealsModel.Meal meal;
 
     public static class Adapter extends RecyclerView.Adapter< Adapter.MyViewHolder >{
 
@@ -43,7 +48,12 @@ public class MealsAdapter {
         @NonNull
         @Override
         public Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View item = LayoutInflater.from( parent.getContext() ).inflate( R.layout.adaptermeals, parent, false );
+            View item = LayoutInflater.from( parent.getContext() ).
+                    inflate(
+                            R.layout.adaptermeals,
+                            parent,
+                            false
+                    );
             return new MyViewHolder( item );
         }
 
@@ -58,7 +68,6 @@ public class MealsAdapter {
                     centerCrop().
                     apply(requestOptions).
                     into(holder.strMealThumb);
-          //  holder.strArea.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_area_location, 0, 0, 0);
         }
 
         @Override
@@ -75,12 +84,10 @@ public class MealsAdapter {
 
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
-
                 strMeal      = itemView.findViewById( R.id.strMeal      );
                 strArea      = itemView.findViewById( R.id.strArea      );
                 strCategory  = itemView.findViewById( R.id.strCategory  );
                 strMealThumb = itemView.findViewById( R.id.strMealThumb );
-
             }
         }
 
@@ -105,10 +112,27 @@ public class MealsAdapter {
                             @Override
                             public void onItemClick(View view, int position) {
 
-                                //MealsModel.Meal meal = mealList.get( position );
+                                MealsModel.Meal meal = mealList.get( position );
+                                ArrayList<String> ingredientsList = new ArrayList<String>();
 
-                                //startActivity(new Intent(getApplicationContext(),Secondclass.class));
+                                populateIngredientList(
+                                        ingredientsList,
+                                        meal
+                                );
 
+                                Intent intent =  new Intent(
+                                        view.getContext(),
+                                        IngredientsActivity.class
+                                );
+                                Bundle bundle = new Bundle();
+
+                                bundle.putString( "StrMealThumb", meal.getStrMealThumb() );
+                                bundle.putString( "StrInstructions", meal.getStrInstructions() );
+                                bundle.putStringArrayList( "ingredientList", ingredientsList );
+
+                                intent.putExtras( bundle );
+
+                                view.getContext().startActivity(intent);
 
                             }
 
@@ -149,6 +173,14 @@ public class MealsAdapter {
             }
         });
 
+    }
+
+    public static MealsModel.Meal getMeal() {
+        return meal;
+    }
+
+    void setMeal(MealsModel.Meal meal) {
+        this.meal = meal;
     }
 
 

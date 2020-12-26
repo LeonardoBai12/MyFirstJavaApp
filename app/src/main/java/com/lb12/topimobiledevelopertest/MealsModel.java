@@ -88,6 +88,9 @@ public class MealsModel {
         @SerializedName("strIngredient19")
         @Expose
         private String strIngredient19;;
+        @SerializedName("strIngredient20")
+        @Expose
+        private String strIngredient20;;
 
         Meal( String idMeal,
               String strMeal,
@@ -115,7 +118,8 @@ public class MealsModel {
               String strIngredient16,
               String strIngredient17,
               String strIngredient18,
-              String strIngredient19 ) {
+              String strIngredient19,
+              String strIngredient20 ) {
 
             this.idMeal = idMeal;
             this.strMeal = strMeal;
@@ -144,6 +148,7 @@ public class MealsModel {
             this.strIngredient17 = strIngredient17;
             this.strIngredient18 = strIngredient18;
             this.strIngredient19 = strIngredient19;
+            this.strIngredient20 = strIngredient20;
 
         }
 
@@ -167,7 +172,7 @@ public class MealsModel {
             return strCategory;
         }
 
-        public void setStrCategory(String strCategory) {
+        public void setStrCategory(String strCategory){
             this.strCategory = strCategory;
         }
 
@@ -175,7 +180,7 @@ public class MealsModel {
             return strArea;
         }
 
-        public void setStrArea(String strArea) {
+        public void setStrArea(String strArea){
             this.strArea = strArea;
         }
 
@@ -203,7 +208,7 @@ public class MealsModel {
             this.strTags = strTags;
         }
 
-        public String getStrYoutube() {
+        public String getStrYoutube(){
             return strYoutube;
         }
 
@@ -361,6 +366,14 @@ public class MealsModel {
 
         public void setStrIngredient19(String strIngredient19) {
             this.strIngredient19 = strIngredient19;
+        }
+
+        public String getStrIngredient20() {
+            return strIngredient19;
+        }
+
+        public void setStrIngredient20(String strIngredient19) {
+            this.strIngredient20 = strIngredient20;
         }
 
     }
