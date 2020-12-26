@@ -125,7 +125,7 @@ public class MealsAdapter {
                                 );
                                 Bundle bundle = new Bundle();
 
-                                bundle.putString( "StrMealThumb", meal.getStrMealThumb() );
+                                bundle.putString( "StrYoutube", meal.getStrYoutube() );
                                 bundle.putString( "StrInstructions", meal.getStrInstructions() );
                                 bundle.putStringArrayList( "ingredientList", ingredientsList );
 

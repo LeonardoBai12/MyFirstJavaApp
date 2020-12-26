@@ -3,41 +3,66 @@ package com.lb12.topimobiledevelopertest;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
+import android.util.Log;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import static com.lb12.topimobiledevelopertest.IngredientsAdapter.createIngredientsAdapter;
+import static com.lb12.topimobiledevelopertest.Utils.extractYoutubeId;
+import static com.lb12.topimobiledevelopertest.Utils.setListViewHeightBasedOnChildren;
 
 public class IngredientsViewModel {
 
     private static ArrayAdapter<String> adapter;
     private static ArrayList<String> ingredientList;
-    private static String strMealThumb;
+    private static String strYoutube;
     private static String strInstructions;
+
     public static void createIngredientsList(
             Context appContext,
-            ImageView imageView,
+            YouTubePlayerView youtubeView,
             ListView ingredientsListView,
             TextView instructionsTextView,
             Intent intent
-    ){
+    ) throws MalformedURLException {
 
         Bundle bundle = intent.getExtras();
 
         if ( bundle != null) {
             ingredientList  = bundle.getStringArrayList("ingredientList");
-            strMealThumb    = bundle.getString("StrMealThumb");
+            strYoutube      = bundle.getString("StrYoutube");
             strInstructions = bundle.getString("StrInstructions");
+        }
+
+        Log.i("ihaaaaa", extractYoutubeId(strYoutube) );
+
+        if ( strYoutube != null && !strYoutube.trim().isEmpty()) {
+
+            youtubeView.initialize(Config.DEVELOPER_KEY,
+                    new YouTubePlayer.OnInitializedListener() {
+                        @Override
+                        public void onInitializationSuccess(YouTubePlayer.Provider provider,
+                                                            YouTubePlayer youTubePlayer, boolean b) {
+                            try {
+                                youTubePlayer.cueVideo(extractYoutubeId(strYoutube));
+                            } catch (MalformedURLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        @Override
+                        public void onInitializationFailure(YouTubePlayer.Provider provider,
+                                                            YouTubeInitializationResult youTubeInitializationResult) {
+
+                        }
+                    });
         }
 
         adapter = createIngredientsAdapter(
@@ -46,33 +71,10 @@ public class IngredientsViewModel {
         );
 
         ingredientsListView.setAdapter( adapter );
-        setListViewHeightBasedOnChildren(ingredientsListView);
+        setListViewHeightBasedOnChildren(ingredientsListView, adapter);
 
         instructionsTextView.setText( strInstructions );
 
-        RequestOptions requestOptions = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL);
-
-        Glide.with(appContext).
-                load(strMealThumb).
-                centerCrop().
-                apply(requestOptions).
-                into( imageView );
-
-    }
-
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
-
-        int totalHeight = 0;
-        for (int i = 0; i < adapter.getCount(); i++) {
-            View listItem = adapter.getView(i, null, listView);
-            listItem.measure(0, 0);
-            totalHeight += listItem.getMeasuredHeight();
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (adapter.getCount() - 1));
-        listView.setLayoutParams(params);
-        listView.requestLayout();
     }
 
 }
