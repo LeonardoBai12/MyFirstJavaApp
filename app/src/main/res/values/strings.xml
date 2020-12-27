@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TOPi Mobile Developer Test</string>
+    <string name="app_name">TOPi Meals</string>
     <string name="ingredientstText">INGREDIENTS</string>
     <string name="instructionstText">INSTRUCTIONS</string>
 </resources>

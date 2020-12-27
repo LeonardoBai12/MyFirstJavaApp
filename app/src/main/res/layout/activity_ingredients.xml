@@ -53,7 +53,7 @@
                 android:fontFamily="sans-serif"
                 android:text="@string/ingredientstText"
                 android:textAlignment="center"
-                android:textColor="@color/purple_500"
+                android:textColor="@color/DarkOrange"
                 android:textSize="24sp" />
 
             <ListView
@@ -75,7 +75,7 @@
                 android:fontFamily="sans-serif"
                 android:text="@string/instructionstText"
                 android:textAlignment="center"
-                android:textColor="@color/purple_500"
+                android:textColor="@color/DarkOrange"
                 android:textSize="24sp" />
 
             <TextView
