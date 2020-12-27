@@ -13,16 +13,15 @@ public class IngredientsActivity extends YouTubeBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(activity_ingredients);
 
-
-            IngredientsViewModel.createIngredientsList(
-                    getApplicationContext(),
-                    findViewById( R.id.youtubeView ),
-                    findViewById( R.id.ingredientsList ),
-                    findViewById( R.id.strMealDescription ),
-                    findViewById( R.id.strMealArea ),
-                    findViewById( R.id.strInstructions ),
-                    getIntent()
-            );
+        IngredientsViewModel.createIngredientsList(
+                getApplicationContext(),
+                findViewById( R.id.youtubeView ),
+                findViewById( R.id.ingredientsList ),
+                findViewById( R.id.strMealDescription ),
+                findViewById( R.id.strMealArea ),
+                findViewById( R.id.strInstructions ),
+                getIntent()
+        );
 
     }
 
