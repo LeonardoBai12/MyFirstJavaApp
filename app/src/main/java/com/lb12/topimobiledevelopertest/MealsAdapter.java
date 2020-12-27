@@ -61,7 +61,6 @@ public class MealsAdapter {
             MealsModel.Meal meal = mealsList.get( position );
             holder.strMeal.setText( meal.getStrMeal() );
             holder.strArea.setText( meal.getStrArea() );
-            holder.strCategory.setText( meal.getStrCategory() );
             Glide.with(context).
                     load(meal.getStrMealThumb()).
                     centerCrop().
@@ -78,14 +77,12 @@ public class MealsAdapter {
 
             TextView strMeal;
             TextView strArea;
-            TextView strCategory;
             ImageView strMealThumb;
 
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
                 strMeal      = itemView.findViewById( R.id.strMeal      );
                 strArea      = itemView.findViewById( R.id.strArea      );
-                strCategory  = itemView.findViewById( R.id.strCategory  );
                 strMealThumb = itemView.findViewById( R.id.strMealThumb );
             }
         }
