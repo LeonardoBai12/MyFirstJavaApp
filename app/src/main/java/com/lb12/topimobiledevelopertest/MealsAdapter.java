@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,17 +25,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.lb12.topimobiledevelopertest.IngredientsModel.populateIngredientList;
-import static com.lb12.topimobiledevelopertest.MealsViewModel.callMealListFromPHP;
 
 public class MealsAdapter {
 
     public static MealsModel.Meal meal;
 
-    public static class Adapter extends RecyclerView.Adapter< Adapter.MyViewHolder >{
+    public static class Adapter extends RecyclerView.Adapter< Adapter.MyViewHolder > implements Filterable {
 
         private final Context context;
 
         private List<MealsModel.Meal> mealsList;
+        private List<MealsModel.Meal> mealsListFull;
         private RequestOptions requestOptions = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL);
 
         public Adapter(Context context){
@@ -42,6 +44,7 @@ public class MealsAdapter {
 
         public void updateList(List<MealsModel.Meal> mealsList){
             this.mealsList = mealsList;
+            mealsListFull = new ArrayList<>( mealsList );
         }
 
         @NonNull
@@ -72,6 +75,47 @@ public class MealsAdapter {
         public int getItemCount() {
             return mealsList.size();
         }
+
+        @Override
+        public Filter getFilter() {
+            return mealFilter;
+        }
+
+        private Filter mealFilter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                List<MealsModel.Meal> filteredList = new ArrayList<>();
+
+                if( constraint == null || constraint.length() == 0 ){
+                    filteredList.addAll( mealsListFull );
+                }else{
+                    String filterPattern =  constraint.toString().toLowerCase().trim();
+
+                    for(MealsModel.Meal item : mealsListFull ){
+
+                        if( item.getStrMeal().toLowerCase().contains(filterPattern) ||
+                            item.getStrArea().toLowerCase().contains(filterPattern) ){
+                            filteredList.add(item);
+                        }
+
+                    }
+                }
+
+                FilterResults results = new FilterResults();
+                results.values = filteredList;
+
+                return results;
+
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mealsList.clear();
+                mealsList.addAll((List)results.values);
+                notifyDataSetChanged();
+            }
+
+        };
 
         public class MyViewHolder extends RecyclerView.ViewHolder{
 

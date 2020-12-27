@@ -19,7 +19,7 @@ public class IngredientsActivity extends YouTubeBaseActivity {
                     findViewById( R.id.youtubeView ),
                     findViewById( R.id.ingredientsList ),
                     findViewById( R.id.strMealDescription ),
-                    findViewById( R.id.strMealArea),
+                    findViewById( R.id.strMealArea ),
                     findViewById( R.id.strInstructions ),
                     getIntent()
             );

@@ -2,11 +2,8 @@ package com.lb12.topimobiledevelopertest;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -14,26 +11,25 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.lb12.topimobiledevelopertest.MainActivity.createRecyclerView;
 import static com.lb12.topimobiledevelopertest.MealsAdapter.createRecyclerViewSwipe;
 
 public class MealsViewModel{
 
-    private static RecyclerView recyclerView;
     private static final String FILTER = "Chicken";
 
     static void populateMealList(
             ProgressDialog progressDialog,
             Context appContext,
-            RecyclerView recyclerViewById,
+            RecyclerView recyclerView,
+            MealsAdapter.Adapter adapter,
             SwipeRefreshLayout swipeContainer
     ){
-
-        recyclerView = recyclerViewById;
-        MealsAdapter.Adapter adapter = new MealsAdapter.Adapter(appContext);
 
         callMealListFromPHP(
                 appContext,
                 progressDialog,
+                recyclerView,
                 adapter
         );
 
@@ -46,16 +42,10 @@ public class MealsViewModel{
 
     }
 
-    static void createRecyclerView( Context appContext ){
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager( appContext );
-        recyclerView.setLayoutManager( layoutManager );
-        recyclerView.setHasFixedSize( true );
-        recyclerView.addItemDecoration( new DividerItemDecoration( appContext, LinearLayout.VERTICAL ) );
-    }
-
     static void callMealListFromPHP(
             Context appContext,
             ProgressDialog progressDialog,
+            RecyclerView recyclerView,
             MealsAdapter.Adapter adapter
     ){
 
@@ -88,7 +78,6 @@ public class MealsViewModel{
                 ).show();
             }
         } );
-
     }
 
 
