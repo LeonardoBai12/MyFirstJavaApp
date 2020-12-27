@@ -1,4 +1,4 @@
-package com.lb12.topimobiledevelopertest;
+package com.lb12.topimobiledevelopertest.ui.meals;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -20,11 +20,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.lb12.topimobiledevelopertest.ui.ingredients.IngredientsActivity;
+import com.lb12.topimobiledevelopertest.R;
+import com.lb12.topimobiledevelopertest.di.util.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.lb12.topimobiledevelopertest.IngredientsModel.populateIngredientList;
+import static com.lb12.topimobiledevelopertest.ui.ingredients.IngredientsModel.populateIngredientList;
 
 public class MealsAdapter {
 

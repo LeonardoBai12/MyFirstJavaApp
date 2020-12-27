@@ -1,11 +1,11 @@
-package com.lb12.topimobiledevelopertest;
+package com.lb12.topimobiledevelopertest.ui.meals;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class MealsModel {
 
-    static class Meal{
+    public class Meal{
 
         @SerializedName("idMeal")
         @Expose

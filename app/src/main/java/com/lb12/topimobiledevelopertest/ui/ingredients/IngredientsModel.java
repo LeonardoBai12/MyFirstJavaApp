@@ -1,4 +1,6 @@
-package com.lb12.topimobiledevelopertest;
+package com.lb12.topimobiledevelopertest.ui.ingredients;
+
+import com.lb12.topimobiledevelopertest.ui.meals.MealsModel;
 
 import java.util.ArrayList;
 

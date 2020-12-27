@@ -1,7 +1,8 @@
-package com.lb12.topimobiledevelopertest;
+package com.lb12.topimobiledevelopertest.ui.meals;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.lb12.topimobiledevelopertest.ui.meals.MealsModel;
 
 import java.util.List;
 

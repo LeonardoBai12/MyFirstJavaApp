@@ -1,4 +1,4 @@
-package com.lb12.topimobiledevelopertest;
+package com.lb12.topimobiledevelopertest.ui.ingredients;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;

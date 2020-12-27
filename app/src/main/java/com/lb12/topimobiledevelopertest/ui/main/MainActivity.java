@@ -1,4 +1,4 @@
-package com.lb12.topimobiledevelopertest;
+package com.lb12.topimobiledevelopertest.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -15,6 +15,10 @@ import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+
+import com.lb12.topimobiledevelopertest.R;
+import com.lb12.topimobiledevelopertest.ui.meals.MealsAdapter;
+import com.lb12.topimobiledevelopertest.ui.meals.MealsViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    static void createRecyclerView( Context appContext ){
+    public static void createRecyclerView(Context appContext){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager( appContext );
         recyclerView.setLayoutManager( layoutManager );
         recyclerView.setHasFixedSize( true );

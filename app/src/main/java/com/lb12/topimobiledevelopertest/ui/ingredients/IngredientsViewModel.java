@@ -1,4 +1,4 @@
-package com.lb12.topimobiledevelopertest;
+package com.lb12.topimobiledevelopertest.ui.ingredients;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,13 +10,14 @@ import android.widget.TextView;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.lb12.topimobiledevelopertest.data.model.Config;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
-import static com.lb12.topimobiledevelopertest.IngredientsAdapter.createIngredientsAdapter;
-import static com.lb12.topimobiledevelopertest.Utils.extractYoutubeId;
-import static com.lb12.topimobiledevelopertest.Utils.setListViewHeightBasedOnChildren;
+import static com.lb12.topimobiledevelopertest.ui.ingredients.IngredientsAdapter.createIngredientsAdapter;
+import static com.lb12.topimobiledevelopertest.di.util.Utils.extractYoutubeId;
+import static com.lb12.topimobiledevelopertest.di.util.Utils.setListViewHeightBasedOnChildren;
 
 public class IngredientsViewModel {
 
