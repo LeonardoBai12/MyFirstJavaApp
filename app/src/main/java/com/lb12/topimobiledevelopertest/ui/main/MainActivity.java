@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById( R.id.recyclerView );
         adapter = new MealsAdapter.Adapter(getApplicationContext());
 
+        createRecyclerView(getApplicationContext());
+
         //Populate Meals List
         MealsViewModel.populateMealList(
                 progressDialog,

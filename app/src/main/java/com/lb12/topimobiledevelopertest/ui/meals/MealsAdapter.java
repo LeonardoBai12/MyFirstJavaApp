@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.lb12.topimobiledevelopertest.ui.ingredients.IngredientsModel.populateIngredientList;
+import static com.lb12.topimobiledevelopertest.ui.meals.MealsViewModel.callMealListFromPHP;
 
 public class MealsAdapter {
 
@@ -202,7 +203,8 @@ public class MealsAdapter {
             SwipeRefreshLayout swipeContainer,
             MealsAdapter.Adapter adapter,
             Context appContext,
-            ProgressDialog progressDialog
+            ProgressDialog progressDialog,
+            RecyclerView recyclerView
     ){
 
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -214,10 +216,12 @@ public class MealsAdapter {
 //                callMealListFromPHP(
 //                        appContext,
 //                        progressDialog,
+//                        recyclerView,
 //                        adapter
 //                );
+//
+//                adapter.notifyDataSetChanged();
                 swipeContainer.setRefreshing(false);
-
 
             }
         });

@@ -14,7 +14,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.lb12.topimobiledevelopertest.ui.main.MainActivity.createRecyclerView;
 import static com.lb12.topimobiledevelopertest.ui.meals.MealsAdapter.createRecyclerViewSwipe;
 
 public class MealsViewModel{
@@ -40,7 +39,8 @@ public class MealsViewModel{
                 swipeContainer,
                 adapter,
                 appContext,
-                progressDialog
+                progressDialog,
+                recyclerView
         );
 
     }
@@ -60,7 +60,6 @@ public class MealsViewModel{
             @Override
             public void onResponse(Call<EnvelopeMeal> call, Response<EnvelopeMeal> response) {
                 progressDialog.dismiss();
-                createRecyclerView(appContext);
                 adapter.updateList(response.body().getMealList());
                 recyclerView.setAdapter( adapter );
                 MealsAdapter.createRecyclerViewClick(

@@ -4,6 +4,8 @@ import com.lb12.topimobiledevelopertest.ui.meals.MealsModel;
 
 import java.util.ArrayList;
 
+import static com.lb12.topimobiledevelopertest.di.util.Utils.addIfNotEmptyOrNull;
+
 public class IngredientsModel {
 
     public static void populateIngredientList(
@@ -33,15 +35,5 @@ public class IngredientsModel {
         addIfNotEmptyOrNull(ingredientsList, meal.getStrIngredient20());
 
     }
-
-    public static void addIfNotEmptyOrNull(
-            ArrayList<String> arrayList,
-            String string
-    ){
-        if ( string != null && !string.trim().isEmpty()) {
-            arrayList.add(string);
-        }
-    }
-
 
 }

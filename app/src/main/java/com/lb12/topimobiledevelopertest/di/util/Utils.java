@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class Utils {
 
@@ -39,6 +40,15 @@ public class Utils {
         params.height = totalHeight + (listView.getDividerHeight() * (adapter.getCount() - 1));
         listView.setLayoutParams(params);
         listView.requestLayout();
+    }
+
+    public static void addIfNotEmptyOrNull(
+            ArrayList<String> arrayList,
+            String string
+    ){
+        if ( string != null && !string.trim().isEmpty()) {
+            arrayList.add(string);
+        }
     }
 
 }
