@@ -6,8 +6,8 @@ import org.junit.Test;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
-import static com.lb12.topimobiledevelopertest.di.util.Utils.addIfNotEmptyOrNull;
-import static com.lb12.topimobiledevelopertest.di.util.Utils.extractYoutubeId;
+import static com.lb12.topimobiledevelopertest.util.Utils.addIfNotEmptyOrNull;
+import static com.lb12.topimobiledevelopertest.util.Utils.extractYoutubeId;
 
 public class UnitTests extends TestCase {
 

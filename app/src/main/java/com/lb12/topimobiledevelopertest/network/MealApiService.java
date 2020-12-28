@@ -1,6 +1,6 @@
-package com.lb12.topimobiledevelopertest.data.rest;
+package com.lb12.topimobiledevelopertest.network;
 
-import com.lb12.topimobiledevelopertest.ui.meals.EnvelopeMeal;
+import com.lb12.topimobiledevelopertest.envelope.EnvelopeMeal;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -1,4 +1,4 @@
-package com.lb12.topimobiledevelopertest.ui.ingredients;
+package com.lb12.topimobiledevelopertest.adapter;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
@@ -10,7 +10,7 @@ public class IngredientsAdapter {
     public void ArrayAdapter() {
     }
 
-    static ArrayAdapter<String> createIngredientsAdapter(
+    public static ArrayAdapter<String> createIngredientsAdapter(
             Context appContext,
             ArrayList<String> ingredientsList
     ) {

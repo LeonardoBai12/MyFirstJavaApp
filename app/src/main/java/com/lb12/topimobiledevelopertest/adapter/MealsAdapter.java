@@ -1,4 +1,4 @@
-package com.lb12.topimobiledevelopertest.ui.meals;
+package com.lb12.topimobiledevelopertest.adapter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -20,15 +20,15 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.lb12.topimobiledevelopertest.ui.ingredients.IngredientsActivity;
+import com.lb12.topimobiledevelopertest.IngredientsActivity;
 import com.lb12.topimobiledevelopertest.R;
-import com.lb12.topimobiledevelopertest.di.util.RecyclerItemClickListener;
+import com.lb12.topimobiledevelopertest.util.RecyclerItemClickListener;
+import com.lb12.topimobiledevelopertest.model.MealsModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.lb12.topimobiledevelopertest.ui.ingredients.IngredientsModel.populateIngredientList;
-import static com.lb12.topimobiledevelopertest.ui.meals.MealsViewModel.callMealListFromPHP;
+import static com.lb12.topimobiledevelopertest.model.IngredientsModel.populateIngredientList;
 
 public class MealsAdapter {
 
@@ -142,7 +142,7 @@ public class MealsAdapter {
 
     }
 
-    static void createRecyclerViewClick(
+    public static void createRecyclerViewClick(
             RecyclerView recyclerView,
             Context appContext,
             List<MealsModel.Meal> mealList
@@ -199,7 +199,7 @@ public class MealsAdapter {
 
     }
 
-    static void createRecyclerViewSwipe(
+    public static void createRecyclerViewSwipe(
             SwipeRefreshLayout swipeContainer,
             MealsAdapter.Adapter adapter,
             Context appContext,

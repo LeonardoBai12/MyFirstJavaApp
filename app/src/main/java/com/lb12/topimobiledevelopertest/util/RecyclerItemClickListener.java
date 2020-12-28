@@ -1,4 +1,4 @@
-package com.lb12.topimobiledevelopertest.di.util;
+package com.lb12.topimobiledevelopertest.util;
 
 import android.content.Context;
 import android.view.GestureDetector;

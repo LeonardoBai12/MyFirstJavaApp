@@ -1,9 +1,9 @@
-package com.lb12.topimobiledevelopertest.ui.ingredients;
+package com.lb12.topimobiledevelopertest;
 
 import android.os.Bundle;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
-import com.lb12.topimobiledevelopertest.R;
+import com.lb12.topimobiledevelopertest.viewmodel.IngredientsViewModel;
 
 import static com.lb12.topimobiledevelopertest.R.layout.activity_ingredients;
 

@@ -9,14 +9,14 @@
         android:roundIcon="@mipmap/ic_topi_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TOPiMobileDeveloperTest">
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.lb12.topimobiledevelopertest.ui.ingredients.IngredientsActivity" >
+        <activity android:name="com.lb12.topimobiledevelopertest.IngredientsActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>

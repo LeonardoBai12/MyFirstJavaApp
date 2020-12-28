@@ -1,4 +1,4 @@
-package com.lb12.topimobiledevelopertest.ui.meals;
+package com.lb12.topimobiledevelopertest.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

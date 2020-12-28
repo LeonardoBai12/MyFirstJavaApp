@@ -1,4 +1,4 @@
-package com.lb12.topimobiledevelopertest.ui.meals;
+package com.lb12.topimobiledevelopertest.viewmodel;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,14 +7,16 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.lb12.topimobiledevelopertest.di.module.RetrofitClientInstance;
-import com.lb12.topimobiledevelopertest.data.rest.MealApiService;
+import com.lb12.topimobiledevelopertest.network.RetrofitClientInstance;
+import com.lb12.topimobiledevelopertest.network.MealApiService;
+import com.lb12.topimobiledevelopertest.adapter.MealsAdapter;
+import com.lb12.topimobiledevelopertest.envelope.EnvelopeMeal;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.lb12.topimobiledevelopertest.ui.meals.MealsAdapter.createRecyclerViewSwipe;
+import static com.lb12.topimobiledevelopertest.adapter.MealsAdapter.createRecyclerViewSwipe;
 
 public class MealsViewModel{
 

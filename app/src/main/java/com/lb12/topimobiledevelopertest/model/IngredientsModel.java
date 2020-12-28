@@ -1,10 +1,8 @@
-package com.lb12.topimobiledevelopertest.ui.ingredients;
-
-import com.lb12.topimobiledevelopertest.ui.meals.MealsModel;
+package com.lb12.topimobiledevelopertest.model;
 
 import java.util.ArrayList;
 
-import static com.lb12.topimobiledevelopertest.di.util.Utils.addIfNotEmptyOrNull;
+import static com.lb12.topimobiledevelopertest.util.Utils.addIfNotEmptyOrNull;
 
 public class IngredientsModel {
 

@@ -1,4 +1,4 @@
-package com.lb12.topimobiledevelopertest.di.module;
+package com.lb12.topimobiledevelopertest.network;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

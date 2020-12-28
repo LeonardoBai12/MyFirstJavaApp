@@ -1,4 +1,4 @@
-package com.lb12.topimobiledevelopertest.ui.main;
+package com.lb12.topimobiledevelopertest;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -16,9 +16,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
-import com.lb12.topimobiledevelopertest.R;
-import com.lb12.topimobiledevelopertest.ui.meals.MealsAdapter;
-import com.lb12.topimobiledevelopertest.ui.meals.MealsViewModel;
+import com.lb12.topimobiledevelopertest.adapter.MealsAdapter;
+import com.lb12.topimobiledevelopertest.viewmodel.MealsViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
