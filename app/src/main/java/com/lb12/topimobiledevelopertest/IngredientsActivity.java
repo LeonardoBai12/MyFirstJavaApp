@@ -28,4 +28,15 @@ public class IngredientsActivity extends YouTubeBaseActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+//        Intent intent = new Intent(
+//                IngredientsActivity.this,
+//                MainActivity.class
+//        );
+//        startActivity( intent );
+//        finish();
+    }
 }

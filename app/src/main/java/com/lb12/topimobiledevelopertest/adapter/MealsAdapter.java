@@ -77,11 +77,11 @@ public class MealsAdapter {
 
             createRecyclerViewClick(
                     this.recyclerView,
-                    this.context,
+                    holder.itemView.getContext(),
                     this.mealsList
             );
 
-            Glide.with(context).
+            Glide.with(holder.itemView.getContext()).
                     load(meal.getStrMealThumb()).
                     centerCrop().
                     apply(requestOptions).
@@ -195,10 +195,9 @@ public class MealsAdapter {
                                 bundle.putStringArrayList( "ingredientList", ingredientsList );
 
                                 intent.putExtras( bundle );
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                                view.getContext().startActivity(intent);
+                                appContext.startActivity(intent);
 
                             }
 
