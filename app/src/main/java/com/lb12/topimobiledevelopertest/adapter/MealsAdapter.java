@@ -196,6 +196,7 @@ public class MealsAdapter {
 
                                 intent.putExtras( bundle );
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                                 view.getContext().startActivity(intent);
 

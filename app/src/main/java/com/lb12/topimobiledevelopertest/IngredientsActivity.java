@@ -28,9 +28,4 @@ public class IngredientsActivity extends YouTubeBaseActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        this.finish();
-        super.onBackPressed();
-    }
 }
