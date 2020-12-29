@@ -170,6 +170,7 @@ public class MealsAdapter {
                         appContext,
                         recyclerView,
                         new RecyclerItemClickListener.OnItemClickListener() {
+
                             @Override
                             public void onItemClick(View view, int position) {
 
@@ -182,7 +183,7 @@ public class MealsAdapter {
                                 );
 
                                 Intent intent =  new Intent(
-                                        view.getContext(),
+                                        appContext,
                                         IngredientsActivity.class
                                 );
                                 Bundle bundle = new Bundle();
