@@ -4,54 +4,36 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
+import com.lb12.topimobiledevelopertest.envelope.EnvelopeMeal;
+import com.lb12.topimobiledevelopertest.model.MealsModel;
 import com.lb12.topimobiledevelopertest.network.RetrofitClientInstance;
 import com.lb12.topimobiledevelopertest.network.MealApiService;
-import com.lb12.topimobiledevelopertest.adapter.MealsAdapter;
-import com.lb12.topimobiledevelopertest.envelope.EnvelopeMeal;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.lb12.topimobiledevelopertest.adapter.MealsAdapter.createRecyclerViewSwipe;
-
-public class MealsViewModel{
+public class MealsViewModel extends ViewModel{
 
     private static final String FILTER = "Chicken";
 
-    public static void populateMealList(
-            ProgressDialog progressDialog,
-            Context appContext,
-            RecyclerView recyclerView,
-            MealsAdapter.Adapter adapter,
-            SwipeRefreshLayout swipeContainer
-    ){
+    private MutableLiveData<List<MealsModel.Meal>> mealList = new MutableLiveData<>();
 
-        callMealListFromPHP(
-                appContext,
-                progressDialog,
-                recyclerView,
-                adapter
-        );
-
-        createRecyclerViewSwipe(
-                swipeContainer,
-                adapter,
-                appContext,
-                progressDialog,
-                recyclerView
-        );
-
+    public MutableLiveData<List<MealsModel.Meal>> getMealList(){
+        return mealList;
+    }
+    public void setMealList(MutableLiveData<List<MealsModel.Meal>> mealList){
+        this.mealList = mealList;
     }
 
-    static void callMealListFromPHP(
+    public void makeAPICall(
             Context appContext,
-            ProgressDialog progressDialog,
-            RecyclerView recyclerView,
-            MealsAdapter.Adapter adapter
+            ProgressDialog progressDialog
     ){
 
         MealApiService service = RetrofitClientInstance.getRetrofitInstance().create( MealApiService.class );
@@ -62,14 +44,7 @@ public class MealsViewModel{
             @Override
             public void onResponse(Call<EnvelopeMeal> call, Response<EnvelopeMeal> response) {
                 progressDialog.dismiss();
-                adapter.updateList(response.body().getMealList());
-                recyclerView.setAdapter( adapter );
-                MealsAdapter.createRecyclerViewClick(
-                        recyclerView,
-                        appContext,
-                        response.body().getMealList()
-                );
-
+                mealList.postValue(response.body().getMealList());
             }
 
             @Override

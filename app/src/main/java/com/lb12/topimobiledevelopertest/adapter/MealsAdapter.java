@@ -1,6 +1,5 @@
 package com.lb12.topimobiledevelopertest.adapter;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -40,15 +38,23 @@ public class MealsAdapter {
 
         private List<MealsModel.Meal> mealsList;
         private List<MealsModel.Meal> mealsListFull;
+        private RecyclerView recyclerView;
         private RequestOptions requestOptions = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL);
 
-        public Adapter(Context context){
+        public Adapter(
+                Context context,
+                List<MealsModel.Meal> mealsList,
+                RecyclerView recyclerView
+        ){
             this.context = context;
+            this.mealsList = mealsList;
+            this.recyclerView = recyclerView;
         }
 
         public void updateList(List<MealsModel.Meal> mealsList){
             this.mealsList = mealsList;
             mealsListFull = new ArrayList<>( mealsList );
+            this.notifyDataSetChanged();
         }
 
         @NonNull
@@ -68,6 +74,13 @@ public class MealsAdapter {
             MealsModel.Meal meal = mealsList.get( position );
             holder.strMeal.setText( meal.getStrMeal() );
             holder.strArea.setText( meal.getStrArea() );
+
+            createRecyclerViewClick(
+                    this.recyclerView,
+                    this.context,
+                    this.mealsList
+            );
+
             Glide.with(context).
                     load(meal.getStrMealThumb()).
                     centerCrop().
@@ -77,7 +90,11 @@ public class MealsAdapter {
 
         @Override
         public int getItemCount() {
-            return mealsList.size();
+            if( !( this.mealsList == null ) ) {
+                return this.mealsList.size();
+            }else{
+                return 0;
+            }
         }
 
         @Override
@@ -177,6 +194,7 @@ public class MealsAdapter {
                                 bundle.putStringArrayList( "ingredientList", ingredientsList );
 
                                 intent.putExtras( bundle );
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                                 view.getContext().startActivity(intent);
 
@@ -196,35 +214,6 @@ public class MealsAdapter {
                         }
                 )
         );
-
-    }
-
-    public static void createRecyclerViewSwipe(
-            SwipeRefreshLayout swipeContainer,
-            MealsAdapter.Adapter adapter,
-            Context appContext,
-            ProgressDialog progressDialog,
-            RecyclerView recyclerView
-    ){
-
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-
-                // TODO
-//                adapter.clear();
-//                callMealListFromPHP(
-//                        appContext,
-//                        progressDialog,
-//                        recyclerView,
-//                        adapter
-//                );
-//
-//                adapter.notifyDataSetChanged();
-                swipeContainer.setRefreshing(false);
-
-            }
-        });
 
     }
 

@@ -1,6 +1,8 @@
 package com.lb12.topimobiledevelopertest;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,12 +19,17 @@ import android.widget.LinearLayout;
 import android.widget.SearchView;
 
 import com.lb12.topimobiledevelopertest.adapter.MealsAdapter;
+import com.lb12.topimobiledevelopertest.model.MealsModel;
 import com.lb12.topimobiledevelopertest.viewmodel.MealsViewModel;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog;
     private SwipeRefreshLayout swipeContainer;
+    private MealsViewModel viewModel;
+    private List<MealsModel.Meal> mealModelList;
     private static RecyclerView recyclerView;
     private static MealsAdapter.Adapter adapter;
 
@@ -35,20 +42,43 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading....");
         progressDialog.show();
 
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+
         recyclerView = findViewById( R.id.recyclerView );
-        adapter = new MealsAdapter.Adapter(getApplicationContext());
-
-        createRecyclerView(getApplicationContext());
-
-        //Populate Meals List
-        MealsViewModel.populateMealList(
-                progressDialog,
-                getApplicationContext(),
-                recyclerView,
-                adapter,
-                findViewById(R.id.swipeContainer)
+        adapter = new MealsAdapter.Adapter(
+                this,
+                mealModelList,
+                recyclerView
         );
 
+        createRecyclerView(this );
+        recyclerView.setAdapter( adapter );
+
+        viewModel = new ViewModelProvider(this).get(MealsViewModel.class);
+
+        viewModel.getMealList().observe(this, new Observer<List<MealsModel.Meal>>() {
+            @Override
+            public void onChanged(List<MealsModel.Meal> mealList) {
+                if ( !(mealList==null) ) {
+                    mealModelList = mealList;
+                    adapter.updateList(mealModelList);
+                }
+            }
+        });
+
+        createRecyclerViewSwipe();
+        viewModel.makeAPICall( getApplicationContext(), progressDialog );
+
+    }
+
+    public void createRecyclerViewSwipe(){
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                viewModel.makeAPICall( getApplicationContext(), progressDialog );
+                swipeContainer.setRefreshing(false);
+            }
+        });
     }
 
     @Override
