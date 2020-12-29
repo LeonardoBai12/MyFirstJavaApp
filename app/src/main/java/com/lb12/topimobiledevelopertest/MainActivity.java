@@ -10,6 +10,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,11 +21,15 @@ import android.widget.SearchView;
 
 import com.lb12.topimobiledevelopertest.adapter.MealsAdapter;
 import com.lb12.topimobiledevelopertest.model.MealsModel;
+import com.lb12.topimobiledevelopertest.util.ItemClickListener;
 import com.lb12.topimobiledevelopertest.viewmodel.MealsViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+import static com.lb12.topimobiledevelopertest.model.IngredientsModel.populateIngredientList;
+
+public class MainActivity extends AppCompatActivity implements ItemClickListener {
 
     ProgressDialog progressDialog;
     private SwipeRefreshLayout swipeContainer;
@@ -48,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new MealsAdapter.Adapter(
                 this,
                 mealModelList,
-                recyclerView
+                this::onMealClick
         );
 
         createRecyclerView(this );
@@ -115,4 +120,34 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration( new DividerItemDecoration( appContext, LinearLayout.VERTICAL ) );
     }
 
+    @Override
+    public void onMealClick(
+            MealsModel.Meal meal
+    ) {
+
+        ArrayList<String> ingredientsList = new ArrayList<String>();
+
+        populateIngredientList(
+                ingredientsList,
+                meal
+        );
+
+        Intent intent =  new Intent(
+                this,
+                IngredientsActivity.class
+        );
+
+        Bundle bundle = new Bundle();
+
+        bundle.putString( "StrYoutube", meal.getStrYoutube() );
+        bundle.putString( "StrInstructions", meal.getStrInstructions() );
+        bundle.putString( "StrMeal", meal.getStrMeal() );
+        bundle.putString( "StrArea", meal.getStrArea() );
+        bundle.putStringArrayList( "ingredientList", ingredientsList );
+
+        intent.putExtras( bundle );
+
+        this.startActivity(intent);
+
+    }
 }

@@ -1,8 +1,6 @@
 package com.lb12.topimobiledevelopertest;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.lb12.topimobiledevelopertest.viewmodel.IngredientsViewModel;
@@ -28,15 +26,4 @@ public class IngredientsActivity extends YouTubeBaseActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-//        Intent intent = new Intent(
-//                IngredientsActivity.this,
-//                MainActivity.class
-//        );
-//        startActivity( intent );
-//        finish();
-    }
 }
