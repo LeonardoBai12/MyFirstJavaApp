@@ -24,77 +24,52 @@ import com.lb12.topimobiledevelopertest.model.MealsModel;
 import com.lb12.topimobiledevelopertest.util.ItemClickListener;
 import com.lb12.topimobiledevelopertest.viewmodel.MealsViewModel;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.InjectMenu;
+import org.androidannotations.annotations.ItemClick;
+import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.OptionsMenuItem;
+import org.androidannotations.annotations.ViewById;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.lb12.topimobiledevelopertest.model.IngredientsModel.populateIngredientList;
 
-public class MainActivity extends AppCompatActivity implements ItemClickListener {
+@EActivity(R.layout.activity_main)
+@OptionsMenu( R.menu.meals_menu )
+public class MainActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog;
-    private SwipeRefreshLayout swipeContainer;
     private MealsViewModel viewModel;
     private List<MealsModel.Meal> mealModelList;
-    private static RecyclerView recyclerView;
     private static MealsAdapter.Adapter adapter;
 
-    @Override
-    protected void onCreate( Bundle savedInstanceState ) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_main );
+    @ViewById
+    static RecyclerView recyclerView;
 
-        progressDialog = new ProgressDialog(MainActivity.this);
-        progressDialog.setMessage("Loading....");
-        progressDialog.show();
+    @ViewById
+    SwipeRefreshLayout swipeContainer;
 
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
-
-        recyclerView = findViewById( R.id.recyclerView );
-        adapter = new MealsAdapter.Adapter(
-                this,
-                mealModelList,
-                this::onMealClick
-        );
-
-        createRecyclerView(this );
-        recyclerView.setAdapter( adapter );
-
-        viewModel = new ViewModelProvider(this).get(MealsViewModel.class);
-
-        viewModel.getMealList().observe(this, new Observer<List<MealsModel.Meal>>() {
-            @Override
-            public void onChanged(List<MealsModel.Meal> mealList) {
-                if ( !(mealList==null) ) {
-                    mealModelList = mealList;
-                    adapter.updateList(mealModelList);
-                }
-            }
-        });
-
+    @AfterViews
+    void afterViews(){
+        createProccessDialog();
+        createAndSetAdapter();
+        createRecyclerView();
+        createViewModel();
         createRecyclerViewSwipe();
-        viewModel.makeAPICall( getApplicationContext(), progressDialog );
-
     }
 
-    public void createRecyclerViewSwipe(){
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                viewModel.makeAPICall( getApplicationContext(), progressDialog );
-                swipeContainer.setRefreshing(false);
-            }
-        });
-    }
+    @OptionsMenuItem( R.id.action_search )
+    MenuItem searchItem;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.meals_menu, menu);
-
-        MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
-
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -113,41 +88,50 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
         return true;
     }
 
-    public static void createRecyclerView(Context appContext){
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager( appContext );
+    void createProccessDialog(){
+        progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.setMessage("Loading....");
+        progressDialog.show();
+    }
+
+    void createAndSetAdapter(){
+        adapter = new MealsAdapter.Adapter(mealModelList);
+    }
+
+    void createRecyclerView(){
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager( getApplicationContext() );
         recyclerView.setLayoutManager( layoutManager );
         recyclerView.setHasFixedSize( true );
-        recyclerView.addItemDecoration( new DividerItemDecoration( appContext, LinearLayout.VERTICAL ) );
+        recyclerView.addItemDecoration( new DividerItemDecoration( getApplicationContext(), LinearLayout.VERTICAL ) );
+        recyclerView.setAdapter( adapter );
     }
 
-    @Override
-    public void onMealClick(
-            MealsModel.Meal meal
-    ) {
+    void createViewModel(){
+        viewModel = new ViewModelProvider(this).get(MealsViewModel.class);
 
-        ArrayList<String> ingredientsList = new ArrayList<String>();
+        viewModel.getMealList().observe(this, new Observer<List<MealsModel.Meal>>() {
+            @Override
+            public void onChanged(List<MealsModel.Meal> mealList) {
+                if ( !(mealList==null) ) {
+                    mealModelList = mealList;
+                    adapter.updateList(mealModelList);
+                }
+            }
+        });
 
-        populateIngredientList(
-                ingredientsList,
-                meal
-        );
+        createRecyclerViewSwipe();
 
-        Intent intent =  new Intent(
-                this,
-                IngredientsActivity.class
-        );
-
-        Bundle bundle = new Bundle();
-
-        bundle.putString( "StrYoutube", meal.getStrYoutube() );
-        bundle.putString( "StrInstructions", meal.getStrInstructions() );
-        bundle.putString( "StrMeal", meal.getStrMeal() );
-        bundle.putString( "StrArea", meal.getStrArea() );
-        bundle.putStringArrayList( "ingredientList", ingredientsList );
-
-        intent.putExtras( bundle );
-
-        this.startActivity(intent);
-
+        viewModel.makeAPICall( getApplicationContext(), progressDialog );
     }
+
+    void createRecyclerViewSwipe(){
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                viewModel.makeAPICall( getApplicationContext(), progressDialog );
+                swipeContainer.setRefreshing(false);
+            }
+        });
+    }
+
 }

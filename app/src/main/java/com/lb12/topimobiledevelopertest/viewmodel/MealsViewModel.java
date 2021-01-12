@@ -27,14 +27,12 @@ public class MealsViewModel extends ViewModel{
     public MutableLiveData<List<MealsModel.Meal>> getMealList(){
         return mealList;
     }
+
     public void setMealList(MutableLiveData<List<MealsModel.Meal>> mealList){
         this.mealList = mealList;
     }
 
-    public void makeAPICall(
-            Context appContext,
-            ProgressDialog progressDialog
-    ){
+    public void makeAPICall(Context appContext, ProgressDialog progressDialog){
 
         MealApiService service = RetrofitClientInstance.getRetrofitInstance().create( MealApiService.class );
         Call<EnvelopeMeal> call = service.getMeals( FILTER );

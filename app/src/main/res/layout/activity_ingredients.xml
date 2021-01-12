@@ -24,7 +24,7 @@
                 android:layout_marginBottom="8sp" />
 
             <TextView
-                android:id="@+id/strMealDescription"
+                android:id="@+id/strMealView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autoText="false"
@@ -35,7 +35,7 @@
                 app:autoSizeTextType="none" />
 
             <TextView
-                android:id="@+id/strMealArea"
+                android:id="@+id/strAreaView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8sp"
@@ -57,7 +57,7 @@
                 android:textSize="24sp" />
 
             <ListView
-                android:id="@+id/ingredientsList"
+                android:id="@+id/ingredientsListView"
                 android:layout_width="match_parent"
                 android:layout_height="496dp"
                 android:layout_margin="8sp"
@@ -79,7 +79,7 @@
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/strInstructions"
+                android:id="@+id/strInstructionsView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10sp"
