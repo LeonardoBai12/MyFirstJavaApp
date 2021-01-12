@@ -69,9 +69,7 @@ public class MealsAdapter {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    onMealClicks(meal, holder);
-
+                    onMealClick(meal, holder);
                 }
             });
 
@@ -82,7 +80,7 @@ public class MealsAdapter {
                     into(holder.strMealThumb);
         }
 
-        private void onMealClicks(MealsModel.Meal meal, @NonNull MyViewHolder holder) {
+        void onMealClick(MealsModel.Meal meal, @NonNull MyViewHolder holder) {
             ArrayList<String> ingredientsList = new ArrayList<String>();
 
             populateIngredientList(
